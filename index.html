@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CG Haubourdin - Site Officiel</title>
+    <style>
+        /* --- VARIABLES & COULEURS --- */
+        :root {
+            --primary-green: #f80f0f; /* Vert Haubourdin */
+            --dark-color: #1a1a1a;
+            --white: #ffffff;
+            --gray-light: #f4f4f4;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* --- RESET & BASE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-main); line-height: 1.6; color: var(--dark-color); }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            background-color: var(--dark-color);
+            color: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary-green); text-transform: uppercase; display: flex; align-items: center; }
+        .logo span { color: var(--white); }
+        .logo img { display: inline-block; margin: 0; }
+
+        nav ul { display: flex; gap: 20px; }
+        nav a { transition: color 0.3s; font-weight: 500; }
+        nav a:hover { color: var(--primary-green); }
+
+        /* Mobile Menu Button (Hidden on Desktop) */
+        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
+
+        /* --- HERO SECTION (ACCUEIL) --- */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('photos/couv1.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 20px;
+        }
+
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; text-transform: uppercase; }
+        .hero p { font-size: 1.5rem; margin-bottom: 30px; font-weight: 300; }
+
+        .btn {
+            padding: 12px 30px;
+            background-color: var(--primary-green);
+            color: var(--white);
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
+            display: inline-block;
+        }
+        .btn:hover { background-color: #000000; }
+        .btn-outline { background: transparent; border: 2px solid var(--white); margin-left: 10px; }
+        .btn-outline:hover { background: var(--white); color: var(--dark-color); }
+
+        /* --- SECTIONS GÉNÉRALES --- */
+        section { padding: 60px 5%; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 40px; color: var(--dark-color); }
+        .section-title span { color: var(--primary-green); }
+
+        /* --- LE CLUB --- */
+        .club-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            align-items: center;
+        }
+        .club-text h3 { font-size: 1.8rem; margin-bottom: 15px; }
+        .values-list li { margin-bottom: 10px; display: flex; align-items: center; }
+        .values-list li::before { content: "⚽"; margin-right: 10px; }
+
+        /* --- ACTUALITÉS --- */
+        .news-bg { background-color: var(--gray-light); }
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .news-card { background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .news-card:hover { transform: translateY(-5px); }
+        .news-img { height: 200px; background-color: #ccc; display: flex; align-items: center; justify-content: center; color: #666; }
+        .news-content { padding: 20px; }
+        .news-date { color: var(--primary-green); font-size: 0.9rem; font-weight: bold; }
+        .news-title { margin: 10px 0; font-size: 1.2rem; }
+
+        /* --- ÉQUIPES --- */
+        .teams-container { text-align: center; }
+        .team-category {
+            display: inline-block;
+            margin: 10px;
+            padding: 20px;
+            background: var(--white);
+            border: 2px solid var(--primary-green);
+            border-radius: 10px;
+            width: 200px;
+            font-weight: bold;
+        }
+        .team-category img { width: 100%; height: 130px; object-fit: cover; border-radius: 8px; margin-bottom: 12px; display: block; }
+
+        /* --- CONTACT --- */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--gray-light);
+            padding: 30px;
+            border-radius: 10px;
+        }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;
+        }
+        .form-group textarea { height: 120px; }
+        
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--white);
+            text-align: center;
+            padding: 40px 20px;
+        }
+        footer .logo { justify-content: center; }
+        .footer-links { margin: 20px 0; }
+        .footer-links a { margin: 0 10px; color: #ccc; }
+        .footer-links a:hover { color: var(--primary-green); }
+
+        /* --- RESPONSIVE MOBILE --- */
+        @media (max-width: 768px) {
+            nav ul { display: none; flex-direction: column; position: absolute; top: 60px; left: 0; width: 100%; background: var(--dark-color); padding: 20px; text-align: center; }
+            nav ul.active { display: flex; }
+            .menu-toggle { display: block; }
+            .hero h1 { font-size: 2.5rem; }
+            .btn-outline { margin-left: 0; margin-top: 10px; display: block; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo"><img src="photos/logo__cgh.jpg" alt="Logo CG Haubourdin" style="height: 50px; margin-right: 15px; vertical-align: middle;">CG <span>Haubourdin</span></div>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <nav>
+            <ul id="nav-list">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#club">Le Club</a></li>
+                <li><a href="#actualites">Actualités</a></li>
+                <li><a href="#equipes">Équipes</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="accueil" class="hero">
+        <div class="hero-content">
+            <h1>Plus qu'un club,<br>une famille</h1>
+            <p>Bienvenue sur le site officiel du CG Haubourdin Football</p>
+            <a href="#equipes" class="btn">Découvrir le club</a>
+            <a href="#contact" class="btn btn-outline">Nous rejoindre</a>
+        </div>
+    </section>
+
+    <section id="club">
+        <div class="section-title">L'Esprit <span>CGH</span></div>
+        <div class="club-grid">
+            <div class="club-img">
+                <img src="https://scontent-cdg4-2.xx.fbcdn.net/v/t39.30808-6/538914094_1378645007600946_6336298239994384864_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_ohc=7Ho_FreMIgIQ7kNvwE_w5nn&_nc_oc=AdkIyTT9l1qYCBDpmjeOJpfK-UfVhwplmCgYqAzjJ3N5X25wKecfE4uzWiBjJOHeqoc&_nc_zt=23&_nc_ht=scontent-cdg4-2.xx&_nc_gid=0Afz8o4VYyHRVFV3-lKrow&oh=00_AfpU9C9nOWXWyPLqN1cEO_qLmys0AEP1L_DGfsWasw3FOQ&oe=6962CEAC" alt="Equipe Haubourdin" style="border-radius: 10px;">
+            </div>
+            <div class="club-text">
+                <h3>Une histoire de passion</h3>
+                <p>Depuis sa création, le CG Haubourdin s'engage à former les jeunes talents et à promouvoir le football dans un esprit de convivialité et de respect. Notre objectif est simple : prendre du plaisir sur le terrain et progresser ensemble.</p>
+                <br>
+                <ul class="values-list">
+                    <li>Esprit d'équipe & Solidarité</li>
+                    <li>Formation de qualité (U7 à Séniors)</li>
+                    <li>Respect de l'adversaire et des arbitres</li>
+                    <li>Engagement local fort</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="actualites" class="news-bg">
+        <div class="section-title">Dernières <span>Actualités</span></div>
+        <div class="news-grid">
+            <div class="news-card">
+                <div class="news-img" style="background: url('https://scontent-cdg4-2.xx.fbcdn.net/v/t39.30808-6/559151199_1368667658598681_4373503191598439653_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_ohc=BhT9bkwndyMQ7kNvwHXC6rq&_nc_oc=Adn5zhFt-7Wv3q8wzHe3sUd_eLt2onZf94zbzXxHgb77Ywmn624pxXN4hCbof-HZU2o&_nc_zt=23&_nc_ht=scontent-cdg4-2.xx&_nc_gid=C3FAumKPZe2q5capOZxJ8w&oh=00_AfqgUyQOACSiD-TBMEeE7Hz7fAPN3MYTYI9fjZB_mWKd1Q&oe=6962E489') center/cover;"></div>
+                <div class="news-content">
+                    <div class="news-date">Dimanche 12 Octobre</div>
+                    <h4 class="news-title">Victoire écrasante des Séniors A !</h4>
+                    <p>L'équipe première s'est imposée 3-0 à domicile ce week-end dans une ambiance de folie.</p>
+                </div>
+            </div>
+            <div class="news-card">
+                <div class="news-img" style="background: url('https://www.facebook.com/photo.php?fbid=1368666695265444&set=pb.100063663781110.-2207520000&type=3') center/cover;"></div>
+                <div class="news-content">
+                    <div class="news-date">Mercredi 08 Octobre</div>
+                    <h4 class="news-title">Ouverture des inscriptions U10</h4>
+                    <p>Les inscriptions pour la catégorie U10 sont ouvertes. Venez faire un essai mercredi prochain.</p>
+                </div>
+            </div>
+            <div class="news-card">
+                <div class="news-img" style="background: url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60') center/cover;"></div>
+                <div class="news-content">
+                    <div class="news-date">Lundi 01 Octobre</div>
+                    <h4 class="news-title">Le repas du club arrive</h4>
+                    <p>Réservez votre soirée du 15 novembre pour le traditionnel repas du club à la salle des fêtes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="equipes">
+        <div class="section-title">Nos <span>Catégories</span></div>
+        <div class="teams-container">
+            <div class="team-category">
+                <img src="photos/ecoledefoot.jpg" alt="École de Foot">
+                <h4>École de Foot</h4>
+                <p>U6 à U9</p>
+            </div>
+            <div class="team-category">
+                <img src="photos/U10.jpg" alt="Pré-Formation">
+                <h4>Pré-Formation</h4>
+                <p>U10 à U13</p>
+            </div>
+            <div class="team-category">
+                <img src="photos/U14.jpg" alt="Formation">
+                <h4>Formation</h4>
+                <p>U14 à U18</p>
+            </div>
+            <div class="team-category">
+                <img src="photos/photo de groupe couv.jpg" alt="Séniors & Vétérans">
+                <h4>Séniors & Vétérans</h4>
+                <p>Compétition & Loisir</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="news-bg">
+        <div class="section-title">Nous <span>Contacter</span></div>
+        <div class="contact-details" style="text-align:center; margin-bottom:18px;">
+            <p style="margin:6px 0;">
+                <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;fill:currentColor;">
+                    <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5L4 8V6l8 5 8-5v2z"/>
+                </svg>
+                Email : <a href="mailto:cghhaubourdinfoot@gmail.com">cghhaubourdinfoot@gmail.com</a>
+            </p>
+            <p style="margin:6px 0;">
+                <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;fill:currentColor;">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/>
+                </svg>
+                Adresse du stade : Avenue de Beaupré, Haubourdin, 59320
+            </p>
+        </div>
+        <div class="contact-form">
+            <form id="contact-form">
+                <div class="form-group">
+                    <label for="name">Nom complet</label>
+                    <input type="text" id="name" placeholder="Votre nom">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="votre@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" placeholder="Demande d'inscription, partenariat..."></textarea>
+                </div>
+                <button type="submit" id="contact-submit" class="btn" style="width:100%; border:none; cursor:pointer;">Envoyer le message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="logo"><img src="photos/logo__cgh.jpg" alt="Logo CG Haubourdin" style="height: 40px; margin-right: 10px; vertical-align: middle;">CG <span>Haubourdin</span></div>
+        <p>Le football pour tous, la passion pour chacun.</p>
+        <p style="margin:8px 0;">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;fill:currentColor;">
+                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5L4 8V6l8 5 8-5v2z"/>
+            </svg>
+            Contact : <a href="mailto:cghhaubourdinfoot@gmail.com">cghhaubourdinfoot@gmail.com</a>
+            &nbsp;&mdash;&nbsp;
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;fill:currentColor;">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/>
+            </svg>
+            Stade : Avenue de Beaupré, 59320 Haubourdin
+        </p>
+        <div class="footer-links">
+            <a href="mentions-legales.html">Mentions Légales</a>
+            <a href="reglement-interieur.html">Règlement Intérieur</a>
+            <a href="https://www.facebook.com/profile.php?id=100063663781110" target="_blank" rel="noopener">Facebook</a>
+            <a href="#">Instagram</a>
+        </div>
+        <p>&copy; 2026 CG Haubourdin Football. Tous droits réservés.</p>
+    </footer>
+    <script>
+        function toggleMenu() {
+            var nav = document.getElementById('nav-list');
+            nav.classList.toggle('active');
+        }
+
+        // Gestionnaire du formulaire de contact : ouvre le client mail
+        (function(){
+            var form = document.getElementById('contact-form');
+            if (!form) return;
+            form.addEventListener('submit', function(e){
+                e.preventDefault();
+                var name = document.getElementById('name').value || '';
+                var email = document.getElementById('email').value || '';
+                var message = document.getElementById('message').value || '';
+                
+                if (!name || !email || !message) {
+                    alert('Veuillez remplir tous les champs.');
+                    return;
+                }
+                
+                var subject = 'Contact site - ' + encodeURIComponent(name);
+                var body = encodeURIComponent('Nom: ' + name + '\nEmail: ' + email + '\n\n' + message);
+                var mailtoLink = 'mailto:cghhaubourdinfoot@gmail.com?subject=' + subject + '&body=' + body;
+                window.location.href = mailtoLink;
+                form.reset();
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+.env.local
+*.log
+/.vercel
+/.cache
+/.DS_Store
+npm-debug.log
+package-lock.json
+yarn.lock
